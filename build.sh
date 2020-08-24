@@ -3,8 +3,6 @@ OUTPUT="properties"
 readonly OUTPUT
 
 # Update docker image and populate with latest jsonnet files
-docker build -t jsonnet/build .
-
 find . -type f -iname "_compose.jsonnet" -print0 | while IFS= read -r -d $'\0' file; do
   tmp="${file/jsonnet/${OUTPUT}}"
   outputPath="${tmp/_compose.jsonnet/}"
