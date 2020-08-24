@@ -1,4 +1,3 @@
-ARG REGISTRY=hub.artifactory.gcp.anz
 ARG IMAGE=bitnami/jsonnet:latest
 
 FROM ${REGISTRY}${REGISTRY:+/}${IMAGE} as BASE
