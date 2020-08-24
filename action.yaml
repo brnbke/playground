@@ -1,5 +1,5 @@
 name: 'Jsonnet'
-description: 'testing come jsonnet'
+description: 'Jsonnet build and style dictionary compile'
 runs:
   using: 'docker'
   image: 'Dockerfile'
