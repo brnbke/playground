@@ -1,11 +1,12 @@
 ARG IMAGE=bitnami/jsonnet:latest
 
-FROM ${REGISTRY}${REGISTRY:+/}${IMAGE} as BASE
+FROM ${IMAGE} as BASE
 
 WORKDIR /usr/src
 
+COPY build.sh /build.sh
 COPY ./jsonnet ./jsonnet
-#COPY package.json package.json
-RUN jsonnet -e {d:4}
 
 ENTRYPOINT ["build.sh"]
+
+RUN jsonnet -e {d:4}
