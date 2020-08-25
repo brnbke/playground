@@ -11,4 +11,4 @@ find . -type f -iname "_compose.jsonnet" -print0 | while IFS= read -r -d $'\0' f
   jsonnet $file -m $outputPath
 done
 
-node styleDictionary
+cat properties/theme/goat
