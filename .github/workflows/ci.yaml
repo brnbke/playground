@@ -1,0 +1,28 @@
+on:
+  push:
+    branches:
+      - '**'
+env: 
+  APPLITOOLS_BATCH_ID: ${{ github.sha }}
+  APPLITOOLS_API_KEY: ${{ secrets.APLI_TOKEN }}
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Log Git SHA
+        run: echo "$GITHUB_SHA"
+      - name: Install
+        run: npm install 
+      - name: eyes
+        run: npx eyes-storybook 
+  applitools-send-completion:
+    needs: ci
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Update Applitools batch status
+        uses: wei/curl@v1.1.1
+        with:
+          args: -d "" -X POST https://eyesapi.applitools.com/api/externals/github/servers/github.com/commit/${{ env.APPLITOOLS_BATCH_ID }}/complete?apiKey=${{ secrets.APLI_TOKEN }}
